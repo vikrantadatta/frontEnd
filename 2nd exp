@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 20px;
+            width: 80%;
+            max-width: 1000px;
+        }
+        .box, .signup-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #1877f2;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #145dbf;
+        }
+        .login-link {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Left Sidebar -->
+        <div class="box">
+            <h2>Navigation</h2>
+            <ul>
+                <li>Home</li>
+                <li>About</li>
+                <li>Contact</li>
+            </ul>
+        </div>
+        
+        <!-- Signup Form -->
+        <div class="signup-container">
+            <h2>Sign Up</h2>
+            <p>It's quick and easy.</p>
+            <input type="text" placeholder="First Name" id="firstName">
+            <input type="text" placeholder="Last Name" id="lastName">
+            <input type="email" placeholder="Email" id="email">
+            <input type="password" placeholder="Password" id="password">
+            <button onclick="registerUser()">Sign Up</button>
+            <p class="login-link">Already have an account? <a href="#">Log in</a></p>
+        </div>
+        
+        <!-- Right Sidebar (Updated for Welcome Message) -->
+        <div class="box" id="welcomeBox">
+            <h2>Friends List</h2>
+            <ul>
+                <li>Alice</li>
+                <li>Bob</li>
+                <li>Charlie</li>
+            </ul>
+        </div>
+    </div>
+    
+    <script>
+        function registerUser() {
+            let firstName = document.getElementById("firstName").value;
+            let lastName = document.getElementById("lastName").value;
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+            
+            if (firstName && lastName && email && password) {
+                document.getElementById("welcomeBox").innerHTML = <h2>Welcome</h2><p>Hello, ${firstName} ${lastName}!</p>;
+                alert("Signup Successful! Welcome, " + firstName + " " + lastName);
+            } else {
+                alert("Please fill all fields.");
+            }
+        }
+    </script>
+</body>
+</html>
