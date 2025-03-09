@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Signup Forms</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f3f3f3;
+        }
+        .container {
+            width: 300px;
+            padding: 20px;
+            background: white;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+        .error {
+            color: red;
+            font-size: 12px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 id="form-title">Login</h2>
+        <form id="auth-form">
+            <div id="name-field" class="hidden">
+                <label>Full Name</label>
+                <input type="text" id="full-name">
+                <span class="error"></span>
+            </div>
+            <div>
+                <label>Email</label>
+                <input type="email" id="email" required>
+                <span class="error"></span>
+            </div>
+            <div>
+                <label>Password</label>
+                <input type="password" id="password" required>
+                <span class="error"></span>
+            </div>
+            <div id="role-field" class="hidden">
+                <label>Role</label>
+                <select id="role">
+                    <option value="user">User</option>
+                    <option value="admin">Admin</option>
+                </select>
+            </div>
+            <div id="terms-field" class="hidden">
+                <input type="checkbox" id="terms"> I agree to the terms and conditions
+                <span class="error"></span>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+        <button id="toggle-form">Don't have an account? Sign up</button>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            let isLogin = true;
+            
+            $("#toggle-form").click(function () {
+                isLogin = !isLogin;
+                $("#form-title").text(isLogin ? "Login" : "Sign Up");
+                $("button[type='submit']").text(isLogin ? "Login" : "Sign Up");
+                $("#toggle-form").text(isLogin ? "Don't have an account? Sign up" : "Already have an account? Login");
+                $("#name-field, #role-field, #terms-field").toggleClass("hidden", isLogin);
+            });
+            
+            $("#auth-form").submit(function (e) {
+                e.preventDefault();
+                $(".error").text("");
+                let valid = true;
+                
+                if (!isLogin && !$("#full-name").val().trim()) {
+                    $("#full-name").next(".error").text("This field is required");
+                    valid = false;
+                }
+                if (!$("#email").val().trim()) {
+                    $("#email").next(".error").text("This field is required");
+                    valid = false;
+                }
+                if (!$("#password").val().trim()) {
+                    $("#password").next(".error").text("This field is required");
+                    valid = false;
+                }
+                if (!isLogin && !$("#terms").is(":checked")) {
+                    $("#terms").next(".error").text("You must agree to the terms");
+                    valid = false;
+                }
+                
+                if (valid) {
+                    alert(isLogin ? "Login successful" : "Signup successful");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
